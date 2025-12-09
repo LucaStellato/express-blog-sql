@@ -8,9 +8,6 @@ function index(req, res) {
         res.json(results)
     })
 
-
-
-
     /* let filteredPost = posts
     if (req.query.tags) {
         filteredPost = posts.filter(
@@ -68,7 +65,17 @@ function update(req, res) {
     res.json(post)
 }
 function destroy(req, res) {
-    const id = parseInt(req.params.id)
+    const { id } = req.params;
+    connection.query('DELETE from posts where id=?', [id], (err) => {
+        if (err) return res.status(500).json({ error: 'failed to delete post' })
+        res.sendStatus(204)
+    });
+
+
+
+
+
+    /*const id = parseInt(req.params.id)
     const post = posts.find(post => post.id === id);
 
     if (!post) {
@@ -81,6 +88,7 @@ function destroy(req, res) {
     }
     posts.splice(posts.indexOf(post), 1)
     res.sendStatus(204)
+    */
 }
 
 module.exports = { index, show, store, update, destroy }
