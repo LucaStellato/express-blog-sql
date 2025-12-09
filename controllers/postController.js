@@ -18,7 +18,19 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    const id = parseInt(req.params.id)
+    const id = req.params.id
+    const sql = 'SELECT * FROM posts WHERE id=?'
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'failed' });
+        if (results.length === 0) return res.status(404).json
+    })
+
+
+
+
+
+
+    /* const id = parseInt(req.params.id)
     const post = posts.find(post => post.id === id)
     if (!post) {
         res.status(404)
@@ -26,7 +38,8 @@ function show(req, res) {
             error: 'Not Found',
             message: 'Post non trovato'
         })
-    }
+    }*/
+
 
 }
 function store(req, res) {
