@@ -1,5 +1,6 @@
 const posts = require('../data/posts');
 
+
 function index(req, res) {
     let filteredPost = posts
     if (req.query.tags) {
